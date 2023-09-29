@@ -79,6 +79,8 @@ public class NumberToWords {
    
    public static void main(String[] args) {
       Scanner scnr = new Scanner(System.in);
+      
+      System.out.println("Please insert a number less than 10");
       int input = scnr.nextInt();
       
       System.out.println (tensDigitToWord(input) + " " + digitToWord(input));
