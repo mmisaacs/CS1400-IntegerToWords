@@ -71,11 +71,6 @@ public class NumberToWords {
       return digitWord;
    } 
    
-   public static String twoDigitNumToWords(int numIn) { 
-      
-      //FINISH
-      return "finish twoDigitNumToWords";
-   } 
    
    public static void main(String[] args) {
       Scanner scnr = new Scanner(System.in);
