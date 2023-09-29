@@ -1,83 +1,85 @@
 import java.util.Scanner;
 
 public class NumberToWords {
-   public static String digitToWord(int digitIn) { 
+   //turn numbers 0-9 into words
+   public static String digitToWord(int digitIn) {
+        String digitWord = "";
+
+        String[] ones = {"zero", "one", "two", "three", "four", "five",
+                "six", "seven", "eight", "nine"};
+        digitWord = ones[digitIn];
+
+        return digitWord;
+    }
+
+   //turn numbers 10-19 into words
+   public static String teensDigitToWord(int digitIn) { 
       String digitWord = "";
-      int numVal = digitIn % 10;
 
-      if (numVal == 0){
-         digitWord = "zero";
-      }
-      else if (numVal == 1){
-         digitWord = "one";
-      }
-      else if (numVal == 2){
-         digitWord = "two";
-      }
-      else if (numVal == 3){
-         digitWord = "three";
-      }
-      else if (numVal == 4){
-         digitWord = "four";
-      }
-      else if (numVal == 5){
-         digitWord = "five";
-      }
-      else if (numVal == 6){
-         digitWord = "six";
-      }
-      else if (numVal == 7){
-         digitWord = "seven";
-      }
-      else if (numVal == 8){
-         digitWord = "eight";
-      }
-      else if (numVal == 9){
-         digitWord = "nine";
-      }
+        String[] tens = {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+                "sixteen", "seventeen", "eighteen", "nineteen"};
 
-      return digitWord;
-   } 
-   
-   public static String tensDigitToWord(int digitIn) { 
-      String digitWord = "";
-      int tens = digitIn / 10;
-
-      if (tens == 2){
-         digitWord = "twenty";
-      }
-      else if (tens == 3){
-         digitWord = "thirty";
-      }
-      else if (tens == 4){
-         digitWord = "forty";
-      }
-      else if (tens == 5){
-         digitWord = "fifty";
-      }
-      else if (tens == 6){
-         digitWord = "sixty";
-      }
-      else if (tens == 7){
-         digitWord = "seventy";
-      }
-      else if (tens == 8){
-         digitWord = "eighty";
-      }
-      else if (tens == 9){
-         digitWord = "ninety";
-      }
+        int i = digitIn % 10;
+        digitWord = tens[i];
       
       return digitWord;
    } 
-   
+
+   //turn numbers 20,30,40,50,60,70,80,90 into words
+   public static String DoubleDigitToWord(int digitIn) {
+        String digitWord = "";
+
+        String[] multiple = {"", "", "twenty", "thirty", "forty", "fifty",
+                "sixty", "seventy", "eighty", "ninety"};
+
+        int i = digitIn / 10;
+        digitWord = multiple[i];
+
+        return digitWord;
+    }
+
+   //combine ones digit and tens digit to make one string
+   public static String twoDigitNumToWords(int numIn) {
+        String digitWord = "";
+
+        if (numIn < 10){
+            digitWord = digitToWord(numIn);
+        }
+        else if (numIn < 20){
+            digitWord = teensDigitToWord(numIn);
+        }
+        else if (((numIn % 10) == 0) && (numIn < 100)) {
+            digitWord = DoubleDigitToWord(numIn);
+        }
+        else if (numIn < 100){
+            digitWord = (DoubleDigitToWord(numIn)) + " " + (digitToWord(numIn % 10));
+        }
+        else{
+            digitWord = "Unexpected Number";
+        }
+
+        return digitWord;
+    }
+
+   //recursion method, continue until number 100 or above is attempted
+   public static void numberInput (Scanner sc){
+        int value = sc.nextInt();
+        if (value < 100){
+            System.out.println (twoDigitNumToWords(value));
+            System.out.println("Please insert a number less than 100");
+            numberInput(sc);
+        }
+        else{
+            System.out.println("Unexpected Number");
+        }
+    }
    
    public static void main(String[] args) {
       Scanner scnr = new Scanner(System.in);
       
       System.out.println("Please insert a number less than 10");
-      int input = scnr.nextInt();
       
-      System.out.println (tensDigitToWord(input) + " " + digitToWord(input));
+      numberInput(sc);
+      sc.close();
    }
 }
