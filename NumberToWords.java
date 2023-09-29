@@ -62,12 +62,12 @@ public class NumberToWords {
     }
 
    //recursion method, continue until number 100 or above is attempted
-   public static void numberInput (Scanner sc){
-        int value = sc.nextInt();
+   public static void numberInput (Scanner scnr){
+        int value = scnr.nextInt();
         if (value < 100){
             System.out.println (twoDigitNumToWords(value));
             System.out.println("Please insert a number less than 100");
-            numberInput(sc);
+            numberInput(scnr);
         }
         else{
             System.out.println("Unexpected Number");
@@ -79,7 +79,7 @@ public class NumberToWords {
       
       System.out.println("Please insert a number less than 10");
       
-      numberInput(sc);
-      sc.close();
+      numberInput(scnr);
+      scnr.close();
    }
 }
